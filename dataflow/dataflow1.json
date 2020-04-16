@@ -12,7 +12,11 @@
 					"name": "source1"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"name": "AboveAvgSepals"
+				}
+			],
 			"transformations": [
 				{
 					"name": "Aggregate1"
@@ -24,7 +28,7 @@
 					"name": "ConditionalSplit1"
 				}
 			],
-			"script": "source(output(\n\t\tsepallength as double,\n\t\tsepalwidth as double,\n\t\tpetallength as double,\n\t\tpetalwidth as double,\n\t\tclass as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tbatchSize: 100,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nsource1 aggregate(avgsepallength = avg(sepallength),\n\t\tavgsepalwidth = avg(sepalwidth),\n\t\tavgpetallength = avg(petallength),\n\t\tavgpetalwidth = avg(petalwidth)) ~> Aggregate1\nsource1, Aggregate1 join(1 == 1,\n\tjoinType:'cross',\n\tbroadcast: 'none')~> Join1\nJoin1 split(sepallength > avgsepallength,\n\tsepalwidth > avgsepalwidth,\n\tpetallength > avgpetallength,\n\tpetalwidth > avgpetalwidth ,\n\tdisjoint: true) ~> ConditionalSplit1@(AboveAvgLongSepals, AboveAvgWideSepals, AboveAvgLongPetals, AboveAvgWidePetals, BelowAverage)"
+			"script": "source(output(\n\t\tsepallength as double,\n\t\tsepalwidth as double,\n\t\tpetallength as double,\n\t\tpetalwidth as double,\n\t\tclass as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tbatchSize: 100,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nsource1 aggregate(avgsepallength = avg(sepallength),\n\t\tavgsepalwidth = avg(sepalwidth),\n\t\tavgpetallength = avg(petallength),\n\t\tavgpetalwidth = avg(petalwidth)) ~> Aggregate1\nsource1, Aggregate1 join(1 == 1,\n\tjoinType:'cross',\n\tbroadcast: 'none')~> Join1\nJoin1 split(sepallength > avgsepallength,\n\tsepalwidth > avgsepalwidth,\n\tpetallength > avgpetallength,\n\tpetalwidth > avgpetalwidth ,\n\tdisjoint: true) ~> ConditionalSplit1@(AboveAvgLongSepals, AboveAvgWideSepals, AboveAvgLongPetals, AboveAvgWidePetals, BelowAverage)\nConditionalSplit1@AboveAvgLongSepals sink(skipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> AboveAvgSepals"
 		}
 	}
 }
