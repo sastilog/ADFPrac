@@ -1,0 +1,24 @@
+{
+	"name": "dataflow1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "IrisDataSet",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "Aggregate1"
+				}
+			],
+			"script": "source(output(\n\t\tsepallength as double,\n\t\tsepalwidth as double,\n\t\tpetallength as double,\n\t\tpetalwidth as double,\n\t\tclass as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tinferDriftedColumnTypes: true,\n\tbatchSize: 100,\n\tisolationLevel: 'READ_UNCOMMITTED',\n\tformat: 'table') ~> source1\nsource1 aggregate(avgsepallength = avg(sepallength),\n\t\tavgsepalwidth = avg(sepalwidth),\n\t\tavgpetallength = avg(petallength),\n\t\tavgpetalwidth = avg(petalwidth)) ~> Aggregate1"
+		}
+	}
+}
