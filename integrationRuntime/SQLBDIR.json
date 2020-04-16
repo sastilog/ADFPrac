@@ -1,0 +1,17 @@
+{
+	"name": "SQLBDIR",
+	"properties": {
+		"type": "Managed",
+		"description": "SQLBDIR",
+		"typeProperties": {
+			"computeProperties": {
+				"location": "AutoResolve",
+				"dataFlowProperties": {
+					"computeType": "General",
+					"coreCount": 8,
+					"timeToLive": 0
+				}
+			}
+		}
+	}
+}
