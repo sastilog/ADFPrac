@@ -1,0 +1,60 @@
+{
+	"name": "AboveAvgSepalLength",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "BlobStorage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "AboveAvgSepalLength.csv",
+				"container": "iris"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "sepallength",
+				"type": "String"
+			},
+			{
+				"name": "sepalwidth",
+				"type": "String"
+			},
+			{
+				"name": "petallength",
+				"type": "String"
+			},
+			{
+				"name": "petalwidth",
+				"type": "String"
+			},
+			{
+				"name": "class",
+				"type": "String"
+			},
+			{
+				"name": "avgsepallength",
+				"type": "String"
+			},
+			{
+				"name": "avgsepalwidth",
+				"type": "String"
+			},
+			{
+				"name": "avgpetallength",
+				"type": "String"
+			},
+			{
+				"name": "avgpetalwidth",
+				"type": "String"
+			}
+		]
+	}
+}
