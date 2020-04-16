@@ -1,0 +1,41 @@
+{
+	"name": "IrisDataSet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SQLDBIR",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "sepallength",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "sepalwidth",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "petallength",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "petalwidth",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "class",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "IRIS"
+		}
+	}
+}
